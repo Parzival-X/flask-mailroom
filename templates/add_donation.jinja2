@@ -1,0 +1,26 @@
+{% extends 'base.jinja2' %}
+
+{% block subtitle %}Add a new donation{% endblock subtitle %}
+
+{% block content %}
+<form method="POST">
+  {% if error %}<p style="color:red;">{{ error }}</p>{% endif %}
+
+  <label for="don_name_list">Donor Name:</label>
+
+  <select id="don_name_list" name="don_name_list" data-width="100%" data-live-search="true">
+    <option>-- Select Donor --</option>
+    {% for donor in donors %}
+      <option value="{{ donor.id }}"> {{ donor.name }} </option>
+    {% endfor %}
+  </select>
+
+  -- or --
+
+  <a id="add" href="{{ url_for('new_donor') }}">Add a new donor</a><br />
+
+  <label for="don_amt">Donation Amount: </label><input type="number" id="don_amt" name="don_amt"><br />
+  <input type="submit" value="Submit">
+
+</form>
+{% endblock content %}

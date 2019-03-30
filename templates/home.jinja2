@@ -1,0 +1,14 @@
+{% extends 'base.jinja2' %}
+
+{% block subtitle %}Welcome!{% endblock subtitle %}
+
+{% block content %}
+  <p> Select an action: </p>
+
+  <ol>
+    <li> <a id="all" href="{{ url_for('all') }}">See all current donations</a> </li>
+    <li> <a id="add" href="{{ url_for('add') }}">Add a new donation</a> </li>
+    <li> <a id="add" href="{{ url_for('new_donor') }}">Add a new donor</a> </li>
+  </ol>
+
+{% endblock content %}
