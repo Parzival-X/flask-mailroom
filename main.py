@@ -71,25 +71,22 @@ def all():
     donor_list = Donor.select()
     donations = Donation.select()
 
-    if request.method == 'POST':
-        try:
-            donor_name = str(request.form['don_name_list'])
+    try:
+        donor_name = str(request.form['don_name_list'])
 
-            if(donor_name == '*'):
-                return render_template('donations.jinja2', donors=donor_list, donations=donations)
-            else:
-                filt_donations = Donation.select().where(Donation.donor == donor_name)
-                return render_template('donations.jinja2',
-                                       donors=donor_list,
-                                       donations=filt_donations)
-
-        except Exception as e:
+        if(donor_name == '*'):
+            return render_template('donations.jinja2', donors=donor_list, donations=donations)
+        else:
+            filt_donations = Donation.select().where(Donation.donor == donor_name)
             return render_template('donations.jinja2',
-                                   error="Please try again!",
                                    donors=donor_list,
-                                   donations=donations)
-    else:
-        return render_template('donations.jinja2', donors=donor_list, donations=donations)
+                                   donations=filt_donations)
+
+    except Exception as e:
+        return render_template('donations.jinja2',
+                               error="Please try again!",
+                               donors=donor_list,
+                               donations=donations)
 
 
 if __name__ == "__main__":
